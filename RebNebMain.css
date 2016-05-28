@@ -1,0 +1,16 @@
+@media all and (min-width: 700px) {
+    
+    
+    
+    .header {
+        height: 106px;
+    }
+    .panel{
+    
+    }
+    h2 {
+    font: 16px Roboto;
+    color: white;
+   
+    }
+}

@@ -1,0 +1,60 @@
+
+/*Header*/
+#header
+{
+    width: 100%;
+    height: 40px;
+    background-color: #C0282F;
+}
+
+#logo{
+    margin-left: 30px;
+    margin-top: 8px;
+    width: 200px;
+    height: 140px;
+}
+
+.desktopnav{
+    display: none;
+}
+
+.mobilenav{
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: #C0282F;
+    width: 40px;
+    height: 40px;
+}
+
+.mobilenav img{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Footer*/
+    .footer{
+    width: 100%;
+    border: 1px;
+    height: 100px;
+    background-color: #C0282F;
+}
+.footer > span{
+    font: 400 18px 'Roboto';
+    color: #f7f7f7;
+    left:229px;
+    top: 42px;
+}
