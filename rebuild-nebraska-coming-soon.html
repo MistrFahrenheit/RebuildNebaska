@@ -1,35 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="RebNebMobile.css" rel="stylesheet" type="text/css">
+    <link href="RebuildNebraskaMain.css" media="all and (min-width: 700px)" rel=
+    "stylesheet" type="text/css">
+        <style>
+            #logo{
+                margin-left: 225px;
+                margin-top: 0px;
+            }
+            
+            #text{
+                font-family: Roboto;
+                font-size: 18px;
+                margin-left: 420px;
+                margin=top: 5px;
+            }
+            
+            #span{
+                font-family: Roboto;
+                font-size: 12px;
+            }
+            
+            #email{
+                margin-left: 450px;
+                margin-top: 15px;
+                position:relative;
+            }
+            
+        </style>
     </head>
     <body>
-        <img src="/Rebuild-Nebraska/rebuild-nebraska-logo-coming-soon.png" width="700" height="400"/>
-        <br/>
-        <br/>
-        <h1>Sign Up to Get Updates on Our Launch</h1>
-        <br/>
-        <br/>
-    <form action="sendto:you@yourdomain.com" method="post" enctype="text/plain">
-        <table border="0" cellspacing="0" cellpadding="4" width="90%">
-            <tr>
-                <td width="30%"><div align="right">
-                    <b>Name</b>
-                    </div>
-                </td>
-                <td width="70%">
-                    <input type="text" name="name" size="20">
-                </td>
-            </tr>
-            <tr>
-                <td><div align="right">
-                    <b>Email</b>
-                    </div>
-                    </td>
-                <td>input type="submit" name="submit" value="Submit"</td>
-                <td>input type="reset" name="reset" value="Reset"</td>
-            </tr>
+        <div id="main">
+        <img id="logo" src="/Users/meagan.morris/Desktop/Rebuild-Nebraska/rebuild-nebraska-logo-coming-soon.png" width="700" height="400" align="middle"/>
+        </div>
+        <div id="text">
+        <h1>Be the First to Know</h1>    
+            <span><p>Register your email and we'll let you know<br/>when we launch our new website!</p></span>    
+        </div>
+        <div id="email">
+        <input type="email" id="emailcollection" placeholder="YOURNAME@ADDRESS.COM"/>&nbsp;
+        <table>
+        <td>
+            <tr><button type="submit">Submit</button>&nbsp;&nbsp;&nbsp;<button type="reset">Reset</button></tr>
+        </td>
         </table>
-        </form>
+        </div>
     </body>
 </html>
 
