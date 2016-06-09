@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script src='http://code.jquery.com/jquery.js'></script>
+    
+    <style>
+        #big{
+            width: 300px;
+            height: 300px;
+            position: relative;
+            border: 1px solid black;
+            
+        }
+        #small{
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background-color: crimson;
+            left: 100px;
+            
+        }
+        
+        
+        
+    </style>
+    </head>
+    <body>
+    <div id="big">
+        <div id="small"> 
+        </div> 
+        </div> 
+    
+    </body>
+    <script>
+        function bounce(){
+        $("#small").animate({
+            left: randomNum(0, 280),
+            top: 280,
+        },{
+            duration: 200,
+            easing: 'linear'
+        }).animate({
+            left: randomNum(0, 280),
+            top: 0,
+           
+    }, {
+            duration: 800,
+            easing: 'linear',
+            complete: function(){
+            bounce();
+                }
+            });
+        }
+        
+        var randomvalue = randomNum(0, 280);
+        
+        function randomNum(min, max){
+            return Math.floor(Math.random() * (max-min+1)+min);
+        }
+        
+        bounce();
+    </script>
+    
+</html>

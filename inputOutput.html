@@ -1,0 +1,62 @@
+<html>
+<head>
+    <style>
+        .remove{
+                color: red;
+            
+        }
+    </style>
+    
+    
+    </head>    
+<body>
+    
+    <label>Enter a name:</label>
+    <input id="name"  />
+    <button id="add" type="button">Add Name</button>
+    <br/>
+    <br/>
+    <h1> Added Names</h1>
+    <div id="names"></div>
+    <script>
+        var namesArr = [];
+        var localStorageAvailable = false;
+        function addToNames(name){
+            console.log(name);
+            document.getElementById("names").innerHTML += "<br/><div><span>"+name+"</span> <span class=\"remove\">x</span></div>";
+            if(!pageLoad){
+            namesArr.push(name);
+            if(localStorageAvailable){
+                localStorage.namesArr = namesArr;
+                }
+            }
+        }
+        
+        
+        document.getElementById("add").onclick = function(){
+            var name = document.getElementById("name").value;
+            addToNames(name);
+            document.getElementById("name").value = "";
+        }
+        
+        var removeElements = document.querySelectorAll(".remove");
+        for (element in removeElements){
+            removeElements[element].onclick = function(e){
+                this.parentElement.remove();
+            }
+        }
+            
+        }
+        
+    if(typeof(Storage)  !== "undefined"){
+        localStorageAvailable = true;
+        var localStorageNames = localStorage.namesArr.split(",")
+        for(i in localStorageNames){
+            addToNames(localStorageNames[i]);
+        }
+       
+    }
+    
+    </script>
+    </body>
+</html>

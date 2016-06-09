@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <script src='http://code.jquery.com/jquery.js'></script>    <!-- jQuery include -->
+        <style>
+            body{
+                padding: 40px;
+            }
+           
+            .remove{
+                color: red;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+           
+            h1{
+                font-size: 25px;
+                font-family: sans-serif;
+                text-align: center;
+            }
+           
+            div{
+                padding: 10px;
+               
+            }
+            #divwrapper{
+                width: 520px;
+                border: 1px solid black;
+                overflow: hidden; /* add this to contain floated children */
+            }
+            #div1{
+                float: left;
+                background-color: aquamarine;
+                float:left; /* add this */
+                height: 500px;
+                width: 220px;
+            }
+            #div2{
+                float: right;
+                background-color:darkseagreen;
+                height: 500px;
+                width: 220px;
+            }
+               
+            
+            div span:first-of-type{
+                font-size: 35px;
+            }
+           
+            span{
+                vertical-align: middle;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="divwrapper"> 
+    <div id="div1">
+        <input id="task" />
+        <button id="add" type="button">Add Task</button>
+        <br/>
+        <br/>
+        <h1><u>Tasks</u></h1>
+        <div id="tasks"></div>
+        <br/>
+        <br/>
+    </div>
+    <div id="div2">
+        <input type="date" id="date" />
+        <button id="addDate" type="button">Add Date</button>
+        <br/>
+        <br/>
+        <h1><u>Dates</u></h1>
+        <div id="dates"></div>
+     </div> 
+        
+    </div>     
+        <script>
+            function addtask(task){ //addtask function, takes in the task to add
+                $("#tasks").append("<div><span class=\"task\">" + task +
+                "</span><span class=\"remove\">X</span></div>"); //append the new markup to the #tasks div
+            }
+           
+            $(document).ready(function(){               
+                $("#task").keypress(function(event){ //input field key handler
+                    if(event.which == 13){ //only run this code if the "enter" key (code 13) is pressed
+                        $("#add").click(); //click the add button for the user
+                    }
+                });
+               
+                $("#add").click(function(){ //add button click handler
+                    var inputtask = $("#task").val(); //get entered task from input field
+                    addtask(inputtask); //call the addtask function
+                    $("#task").val(""); //clear out the input field
+                });
+               
+                $(document).on("click", ".remove", function(event){
+                    //remember this event is hooked to the document level so that it fires on elements that are created later as well
+                    $(this).parent().remove(); //step from the clicked remove node to the parent wrapping div and remove it from the DOM/Markup
+                });
+            });
+           
+            
+            
+            
+              function adddate(date){ //adddate function, takes in the date to add
+                $("#dates").append("<div><span class=\"date\">" + date +
+                "</span><span class=\"remove\">X</span></div>"); //append the new markup to the #dates div
+            }
+           
+            $(document).ready(function(){                
+                $("#date").keypress(function(event){ //input field key handler
+                    if(event.which == 13){ //only run this code if the "enter" key (code 13) is pressed
+                        $("#addDate").click(); //click the add button for the user
+                    }
+                });
+               
+                $("#addDate").click(function(){ //add button click handler
+        
+                    var inputdate = $("#date").val(); //get entered date from input field
+                    adddate(inputdate); //call the adddate function
+                    $("#date").val(""); //clear out the input field
+                });
+               
+             $(document).on("click", ".remove", function(event){
+                    //remember this event is hooked to the document level so that it fires on elements that are created later as well
+                    $(this).parent().remove(); //step from the clicked remove node to the parent wrapping div and remove it from the DOM/Markup
+                });
+            });
+           
+        </script>
+    </body>
+</html>

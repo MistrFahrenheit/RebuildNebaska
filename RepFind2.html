@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #senator_image > img{
+            width: 200px;
+        }
+        
+        #map_canvas{
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" role="form" action="#" onsubmit="showAddress(this.address.value); return false" id="address_search">
+        <label for="senators-search">Street Address</label>
+        <input type="search" name="address" placeholder="Enter Street Address, City State Zip" id="senators-search">
+        <span>
+            <button type="submit" id="senator-search-submit" title="Search">Submit</button>
+        </span>
+    </form>
+    <div id="map-reset">
+        <button type="button" id="reset-btn" onclick="resetMap()" title="Reset Map">Reset Map</button>
+    </div>
+    <div id="map_canvas"></div>
+    <div id="senator_info"></div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBT4c-bWbu_i7fcKR_YlKofs1fkSGgid6w"></script>
+	<script src="geoxml3.js"></script>
+    <script>
+        var senator_data = {"1":{"senator_name":"Dan Watermeier","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist01\/dist01.jpg","url":"http:\/\/news.legislature.ne.gov\/dist01\/"},"2":{"senator_name":"Bill Kintner","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist02\/dist02.jpg","url":"http:\/\/news.legislature.ne.gov\/dist02\/"},"3":{"senator_name":"Tommy Garrett","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist03\/dist03.jpg","url":"http:\/\/news.legislature.ne.gov\/dist03\/"},"4":{"senator_name":"Robert Hilkemann","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist04\/dist04.jpg","url":"http:\/\/news.legislature.ne.gov\/dist04\/"},"5":{"senator_name":"Heath Mello","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist05\/dist05.jpg","url":"http:\/\/news.legislature.ne.gov\/dist05\/"},"6":{"senator_name":"Joni Craighead","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist06\/dist06.jpg","url":"http:\/\/news.legislature.ne.gov\/dist06\/"},"7":{"senator_name":"Nicole Fox","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist07\/dist07.jpg","url":"http:\/\/news.legislature.ne.gov\/dist07\/"},"8":{"senator_name":"Burke Harr","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist08\/dist08.jpg","url":"http:\/\/news.legislature.ne.gov\/dist08\/"},"9":{"senator_name":"Sara Howard","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist09\/dist09.jpg","url":"http:\/\/news.legislature.ne.gov\/dist09\/"},"10":{"senator_name":"Bob Krist","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist10\/dist10.jpg","url":"http:\/\/news.legislature.ne.gov\/dist10\/"},"11":{"senator_name":"Ernie Chambers","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist11\/dist11.jpg","url":"http:\/\/news.legislature.ne.gov\/dist11\/"},"12":{"senator_name":"Merv Riepe","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist12\/dist12.jpg","url":"http:\/\/news.legislature.ne.gov\/dist12\/"},"13":{"senator_name":"Tanya Cook","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist13\/dist13.jpg","url":"http:\/\/news.legislature.ne.gov\/dist13\/"},"14":{"senator_name":"Jim Smith","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist14\/dist14.jpg","url":"http:\/\/news.legislature.ne.gov\/dist14\/"},"15":{"senator_name":"David A. Schnoor","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist15\/dist15.jpg","url":"http:\/\/news.legislature.ne.gov\/dist15\/"},"16":{"senator_name":"Lydia Brasch","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist16\/dist16.jpg","url":"http:\/\/news.legislature.ne.gov\/dist16\/"},"17":{"senator_name":"Dave Bloomfield","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist17\/dist17.jpg","url":"http:\/\/news.legislature.ne.gov\/dist17\/"},"18":{"senator_name":"Brett Lindstrom","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist18\/dist18.jpg","url":"http:\/\/news.legislature.ne.gov\/dist18\/"},"19":{"senator_name":"Jim Scheer","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist19\/dist19.jpg","url":"http:\/\/news.legislature.ne.gov\/dist19\/"},"20":{"senator_name":"John S. McCollister","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist20\/dist20.jpg","url":"http:\/\/news.legislature.ne.gov\/dist20\/"},"21":{"senator_name":"Ken Haar","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist21\/dist21.jpg","url":"http:\/\/news.legislature.ne.gov\/dist21\/"},"22":{"senator_name":"Paul Schumacher","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist22\/dist22.jpg","url":"http:\/\/news.legislature.ne.gov\/dist22\/"},"23":{"senator_name":"Jerry Johnson","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist23\/dist23.jpg","url":"http:\/\/news.legislature.ne.gov\/dist23\/"},"24":{"senator_name":"Mark A. Kolterman","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist24\/dist24.jpg","url":"http:\/\/news.legislature.ne.gov\/dist24\/"},"25":{"senator_name":"Kathy Campbell","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist25\/dist25.jpg","url":"http:\/\/news.legislature.ne.gov\/dist25\/"},"26":{"senator_name":"Matt Hansen","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist26\/dist26.jpg","url":"http:\/\/news.legislature.ne.gov\/dist26\/"},"27":{"senator_name":"Colby Coash","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist27\/dist27.jpg","url":"http:\/\/news.legislature.ne.gov\/dist27\/"},"28":{"senator_name":"Patty Pansing Brooks","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist28\/dist28.jpg","url":"http:\/\/news.legislature.ne.gov\/dist28\/"},"29":{"senator_name":"Kate Bolz","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist29\/dist29.jpg","url":"http:\/\/news.legislature.ne.gov\/dist29\/"},"30":{"senator_name":"Roy E. Baker","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist30\/dist30.jpg","url":"http:\/\/news.legislature.ne.gov\/dist30\/"},"31":{"senator_name":"Rick Kolowski","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist31\/dist31.jpg","url":"http:\/\/news.legislature.ne.gov\/dist31\/"},"32":{"senator_name":"Laura Ebke","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist32\/dist32.jpg","url":"http:\/\/news.legislature.ne.gov\/dist32\/"},"33":{"senator_name":"Les Seiler","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist33\/dist33.jpg","url":"http:\/\/news.legislature.ne.gov\/dist33\/"},"34":{"senator_name":"Curt Friesen","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist34\/dist34.jpg","url":"http:\/\/news.legislature.ne.gov\/dist34\/"},"35":{"senator_name":"Mike Gloor","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist35\/dist35.jpg","url":"http:\/\/news.legislature.ne.gov\/dist35\/"},"36":{"senator_name":"Matt Williams","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist36\/dist36.jpg","url":"http:\/\/news.legislature.ne.gov\/dist36\/"},"37":{"senator_name":"Galen Hadley","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist37\/dist37.jpg","url":"http:\/\/news.legislature.ne.gov\/dist37\/"},"38":{"senator_name":"John L. Kuehn","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist38\/dist38.jpg","url":"http:\/\/news.legislature.ne.gov\/dist38\/"},"39":{"senator_name":"Beau McCoy","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist39\/dist39.jpg","url":"http:\/\/news.legislature.ne.gov\/dist39\/"},"40":{"senator_name":"Tyson Larson","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist40\/dist40.jpg","url":"http:\/\/news.legislature.ne.gov\/dist40\/"},"41":{"senator_name":"Kate Sullivan","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist41\/dist41.jpg","url":"http:\/\/news.legislature.ne.gov\/dist41\/"},"42":{"senator_name":"Mike Groene","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist42\/dist42.jpg","url":"http:\/\/news.legislature.ne.gov\/dist42\/"},"43":{"senator_name":"Al Davis","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist43\/dist43.jpg","url":"http:\/\/news.legislature.ne.gov\/dist43\/"},"44":{"senator_name":"Dan Hughes","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist44\/dist44.jpg","url":"http:\/\/news.legislature.ne.gov\/dist44\/"},"45":{"senator_name":"Sue Crawford","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist45\/dist45.jpg","url":"http:\/\/news.legislature.ne.gov\/dist45\/"},"46":{"senator_name":"Adam Morfeld","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist46\/dist46.jpg","url":"http:\/\/news.legislature.ne.gov\/dist46\/"},"47":{"senator_name":"Ken Schilz","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist47\/dist47.jpg","url":"http:\/\/news.legislature.ne.gov\/dist47\/"},"48":{"senator_name":"John P. Stinner","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist48\/dist48.jpg","url":"http:\/\/news.legislature.ne.gov\/dist48\/"},"49":{"senator_name":"John Murante","image_url":"http:\/\/www.nebraskalegislature.gov\/media\/images\/senators\/dist49\/dist49.jpg","url":"http:\/\/news.legislature.ne.gov\/dist49\/"}};    
+    </script>
+	<script>
+		var centerLat = '41.4554';
+		var centerLng = '-99.5948';
+		var mapzoom = 6;
+		(function($) {
+			var latlang = new google.maps.LatLng(centerLat, centerLng);
+			var myOptions = {
+				zoom: mapzoom,
+				center: latlang,
+				mapTypeId: google.maps.MapTypeId.HYBRID
+			};
+			geocoder = new google.maps.Geocoder();
+			map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+			marker = null;
+			infowindow = new google.maps.InfoWindow( { size: new google.maps.Size(150,50) } );
+
+			geoXml = new geoXML3.parser( { map: map, singleInfoWindow: true, infoWindowCallback: myInfoWindowCallback } );
+			geoXml.parse('kml/2013_districts.kml');
+		})(jQuery);
+
+		function resetMap() {
+			var location = new google.maps.LatLng(centerLat, centerLng);
+			map.setCenter(location);
+			map.setZoom(mapzoom);
+		}
+
+		function myInfoWindowCallback(placemark, doc, gObj) {
+			updateSenatorHtml(placemark.name);
+            scrollToSenator();
+        }
+
+		function showAddress(address) {
+			if(address == '') {
+				return;
+			}
+			var contentString = address+"<br>Outside Area";
+
+			geocoder.geocode( { 'address': address}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var point = results[0].geometry.location;
+					contentString += "<br>"+point;
+					senatorString = "";
+					districtString = "";
+					map.setCenter(point);
+					map.setZoom(12);
+					if (marker && marker.setMap) marker.setMap(null);
+					marker = new google.maps.Marker( {
+						map: map,
+						position: point
+					} );
+					for (var i=0; i<geoXml.docs[0].gpolygons.length; i++) {
+						if (google.maps.geometry.poly.containsLocation(point, geoXml.docs[0].gpolygons[i])) {
+							contentString = address+"<br>"+geoXml.docs[0].placemarks[i].name;
+							districtString = geoXml.docs[0].placemarks[i].name;
+							//senatorString = "<center>" + geoXml.docs[0].placemarks[i].name + "</center><br>" + geoXml.docs[0].placemarks[i].description;
+							i = 999; // Jump out of loop
+						}
+					}
+					google.maps.event.addListener(marker, 'click', function() {
+						infowindow.setContent(contentString);
+						infowindow.open(map,marker);
+						updateSenatorHtml(districtString);
+                        scrollToSenator();
+					});
+					google.maps.event.trigger(marker,"click");
+				} else {
+					alert("Geocode was not successful for the following reason: " + status);
+				}
+			});
+		}
+        
+		function updateSenatorHtml(districtString) {
+			console.log(districtString);
+            if(districtString==""){return};
+			var districtNumber = districtString.replace( /^\D+/g, '');
+			var senatorHtml = '<div id="district_name">District '+districtNumber+'</div>'
+					+'<div id="senator_name">'+senator_data[districtNumber].senator_name+'</div>'
+					+'<div id="senator_image"><img src="'+senator_data[districtNumber].image_url+'"></div>'
+					+'<div id="senator_url"><div><button type="button" onclick="window.location.href=\''+senator_data[districtNumber].url+'\'">Web Page</button></div></div>';
+			$('#senator_info').html(senatorHtml);
+		}
+        
+        function scrollToSenator() {
+            var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            if(w < 992) {
+                var target = $('#senator_info');
+                $('html,body').animate( {
+                    scrollTop: target.offset().top
+                }, 1000);
+            }
+        }
+	</script>
+</body>
+</html>

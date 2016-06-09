@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script src=’http://code.jquery.com/jquery.js’></script>
+    
+    </head>
+    <body>
+     <div id="myDiv">Text</div>
+            <button id="hide" type="button">Hide</button>
+            <button id="show" type="button">Show</button>
+            <button id="add" type="button">Add Content</button>
+
+         <script>
+            $(document).ready(function(event){
+               $("#hide").click)function(){
+                   $("#myDiv").hide();
+               });
+                
+                $("#show").click(function(){
+                    $("#myDiv").show();
+                }); 
+                
+                $("#add").click(function(){
+                    $("#myDiv").append("<span class='remove'>REMOVE</span>")
+                });
+                
+                $(document).on("click", ".remove", function(event){
+                    event.target.remove();
+                });    
+            }); 
+        </script>
+    </body>
+    
+</html>

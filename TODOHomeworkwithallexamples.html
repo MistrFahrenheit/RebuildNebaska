@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script src='http://code.jquery.com/jquery.js'></script>    <!-- jQuery include -->
+        <style>
+            body{
+                padding: 40px;
+            }
+            
+            .remove{
+                color: red;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+            
+            h1{
+                font-size: 50px;
+            }
+            
+            div{
+                padding-left: 20px;
+            }
+            
+            div span:first-of-type{
+                font-size: 35px;
+            }
+            
+            span{
+                vertical-align: middle;
+            }
+  
+            .important{
+                font-weight: bold;
+                color: red;
+            }
+            
+            .completed{
+                text-decoration: line-through;
+                opacity: 0.5;
+            }
+            
+            #flex{
+               display: flex; 
+            }
+            
+            .flexchild{
+                flex-grow: 1;
+                text-align: center;
+            }
+            
+            .remove{
+                visibility: hidden;
+            }
+            
+            .completed ~ .remove{
+                visibility: visible;
+            }
+​
+        </style>
+    </head>
+    <body>
+        <label for="important">High Priority: </label><input id="important" type="checkbox" />
+        <label for="name">Task name: </label><input id="name" />
+        <label for="date">Due Date: </label><input id="date" type="date" />
+        <select id="listChoice">
+            <option value="tasks">Tasks List</option>
+            <option value="grocery">Grocery List</option>
+            <option value="longterm">Long Term List</option>
+        </select>
+        <button id="add" type="button">Add Task</button>
+        <br/>
+        <br/>
+        <div id="flex">
+            <div class="flexchild">
+                <h1>Current Tasks</h1>
+                <div id="tasks"></div>
+            </div>
+            <div class="flexchild">
+                <h1>Grocery List</h1>
+                <div id="grocery"></div>
+            </div>
+            <div class="flexchild">
+                <h1>Long Term Tasks</h1>
+                <div id="longterm"></div>
+            </div>
+        </div>
+        <script>
+            function addTask(name, date, important, listChoice){ //addTask function, takes in the name to add
+                var classForSpan = "task";
+                var dateString = "";
+                if(important){
+                    classForSpan += " important";
+                }
+                if(date != ""){
+                    dateString = " (due: "+date+")";
+                }
+                $("#"+listChoice).append("<div><span class='"+classForSpan+"'>" + name + dateString + "</span><span class=\"remove\">x</span></div>"); //append the new markup to the #tasks div
+            }
+            
+            $(document).ready(function(){                
+                $("#name, #date, #important, #listChoice").keypress(function(event){ //input field key handler
+                    if(event.which == 13){ //only run this code if the "enter" key (code 13) is pressed
+                        $("#add").click(); //click the add button for the user
+                    }
+                });
+                
+                $("#add").click(function(){ //add button click handler
+                    var taskName = $("#name").val(); //get entered task name from input field
+                    var taskDate = $("#date").val(); //get entered task date from input field
+                    var important = $("#important").prop("checked"); //get checkbox value
+                    var listChoice = $("#listChoice").val(); //get entered list choice from select
+                    addTask(taskName, taskDate, important, listChoice); //call the addName function
+                    $("#name").val(""); //clear out the input field
+                    $("#date").val(""); //clear out the input field
+                    $("#important").prop("checked", false); //sets checkbox to unchecked
+                });
+                
+                $(document).on("click", ".task", function(event){
+                    //remember this event is hooked to the document level so that it fires on elements that are created later as well
+                    $(this).toggleClass("completed"); //addClass if class not applied/removeClass if already applied
+                });
+                
+                $(document).on("click", ".remove", function(event){
+                    //remember this event is hooked to the document level so that it fires on elements that are created later as well
+                    $(this).parent().remove(); //step from the clicked remove node to the parent wrapping div and remove it from the DOM/Markup
+                });
+            });
+        </script>
+    </body>
+</html>
