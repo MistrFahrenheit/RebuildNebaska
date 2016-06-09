@@ -1,6 +1,13 @@
 @media all and (min-width: 700px) {
     
+/* Web Colors from Logo
+    #C0282F - Dark Red
+    #C14147 - Lighter Red
+    #DB9295 - Pink
+    #DEA599 - Light Pink
+    #F8F1F0 - Off-White
     
+    */    
     
     .header {
         height: 106px;
@@ -8,9 +15,21 @@
     .panel{
     
     }
-    h2 {
-    font: 16px Roboto;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6
+    {
+    font: Roboto;
     color: white;
    
     }
+    
+    
+    body{
+        
+    }
+    
 }
