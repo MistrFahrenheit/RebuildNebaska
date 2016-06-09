@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image Slider</title>
+        <link rel="stylesheet" type="text/css" href="slider.css">
+        
+         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        <link href="RebNebMobile.css" rel="stylesheet" type="text/css">
+        <link href="RebNebMain.css" media="all and (min-width: 700px)" rel="stylesheet" type="text/css">
+        
+        <style>
+    #header {
+        height: 106px;
+        position: relative;
+       
+    }
+
+    #logo {
+        margin-left: 40px;
+        margin-top: 17px;
+        width: 120px;
+        height: 70px;
+    }
+    #emailcollection{
+        position: absolute;
+        right: 5px;
+        top: 25px;
+        width: 140px;
+        height: 20px;
+        font: italic 10px / 14px DroidSerif;
+       
+      }
+      
+    #join {
+        position: absolute;
+        top: 0px;
+        left:1125px;
+        font: 18px Roboto;
+        color: white;
+    }
+    #repfind{
+        position: absolute;
+        top: 5px;
+        left:850px;
+        width:200px;
+        height: 90px;
+        border: 1px;
+        border-color: black; 
+        border-style: solid;
+        border-width: 3px;
+        color:#f7f7f7; 
+        text-align: center;
+        vertical-align: center;
+        cursor: pointer;
+      } 
+    #find {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 16px;
+        text-align:center;
+        font: 23px Roboto;
+        color: black;
+    }
+    #nebmap {
+        width: 200px;
+        height: 90px;
+      }
+    .desktopnav {
+        display: inline;
+        position: absolute;
+        right: 450px;
+        top: 35px;
+        font: 900 24px 'Roboto';
+    }
+
+    .desktopnav a {
+        color: #f7f7f7;
+        text-decoration: none;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .sociabutton {
+        width: 40px;
+        height: 40px;
+      }
+    #facebook{
+        position: absolute;
+        right: 50px;
+        top: 68px;
+          
+      }
+    #twitter{
+        position: absolute;
+        right: 10px;
+        top: 68px; 
+      }
+  
+      
+    .mobilenav {
+        display: none;
+    }
+     
+      #footertext {
+        position: relative;
+        top: 50px;
+        text-align: center;
+        font: 20px Roboto;
+        color: white;
+          
+   
+    }
+            
+        #about {
+            font: 20px Roboto;
+            background-color: gray;
+            }
+            
+            #policy {
+                font: 20px Roboto;
+                background-color: gray;
+            }
+        </style> 
+    </head>
+    <body>
+        
+        <div id="header">
+        <a href="#"><img alt="Logo" id="logo" src="images/rebuildNebraskaLG.png"></a>
+        <nav>
+            <span class="desktopnav">
+            <a class="active" href="#">ABOUT</a>
+            <a href="#">GET INVOLVED</a> 
+            <a href="#">CONNECT</a> 
+            <a href="#">RESOURCES</a>
+            </span> 
+            
+            <a class="mobilenav" href="#"><img alt="Toggle Menu" src="images/icon.png"></a>
+            
+        <div id="repfind">
+            <span id="find">FIND YOUR <br> REPRESENTATIVES</span>
+            <a href="#"><img alt="Neb Map" id="nebmap" src="images/dmvcountiesmap1.gif"></a>
+        </div>   
+            <span id="join">STAY UPDATED!</span>    
+            <input type="email" id="emailcollection" placeholder="YOURNAME@ADDRESS.COM"/>
+        <br/>
+            <a  href='https://www.facebook.com/RebuildNebraska/'><img id="facebook" class="socialbutton" width = 35 alt='FB' src=images/facebook-square-logo-.png></a>
+    
+            <a href="https://twitter.com/rebuildnebraska"><img id="twitter" class="socialbutton" width = 35 alt='twitter'src=images/Twitter_Logo_Hd_Png_03.png></a>    
+        </nav>
+
+    
+    </div>
+        
+        <br/>
+        
+        <div id="slider">
+        <figure>
+            <img src="file:///C:/Users/Erin/Desktop/Rebuild%20Nebraska/367151351_c7d068c481_b.jpg">
+            <img src="file:///C:/Users/Erin/Desktop/Rebuild%20Nebraska/2088235265_578daba6e8_b.jpg">
+            <img src="file:///C:/Users/Erin/Desktop/Rebuild%20Nebraska/2174111548_2c80848954_z.jpg">
+            <img src="file:///C:/Users/Erin/Desktop/Rebuild%20Nebraska/5124912464_df0d6812dc_b.jpg">
+            
+        </figure>
+        </div>
+        
+        <br/>
+        
+        <div id="about">
+            <h2>About Rebuild Nebraska</h2>
+            <p>Rebuild Nebraska is a coalition of organizations dedicated to rebuilding Nebraska's families, communities, businesses, schools, infrastructure and workforce.
+
+                In 2011, member organizations banded together to support tax and budget policies that protect investments in the building blocks of our state. Coalition members also want to promote the values of hard-working Nebraskans, such as, top-notch neighborhood schools, health care and public safety.
+
+                Nebraska is continually recognized for its high quality of life. Rebuild members want to ensure "The Good Life" is available to individuals and families across the state.</p>
+        </div>
+        
+        <div id="newsbar"></div>
+        
+        <div id="organizationsslider">
+        
+        </div>
+        
+        <div id="policy">
+            <h2>Policy Platform</h2>
+            <p>Rebuild Nebraska is a statewide coalition advocating for policies that support individuals and families and the core values that lead to stronger communities. Those values include great public schools, which provide the training needed for our future workforce; infrastructure that allows businesses and individuals to travel efficiently and safely; public safety and industries that are the foundation of our state.
+
+                Nebraska is highly rated for its quality of life and we want to not only protect it but also ensure "The Good Life" is available to every Nebraskan. To do that, we need a tax system that is modern, fair and designed to meet the needs of our state. Proper state investment can promote jobs, grow our economy and maintain our neighborhoods.
+                These are only possible with a tax code that provides enough resources.</p>
+        </div>
+        
+        <footer class="footer">
+    
+            <h2 id= "footertext">LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM LOREM IPSUM</h2>
+    
+    </footer>
+    
+    </body>
+</html>
