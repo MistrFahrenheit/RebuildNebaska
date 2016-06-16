@@ -22,7 +22,7 @@
     #emailcollection{
         position: absolute;
         right: 5px;
-        top: 25px;
+        top: 28px;
         width: 140px;
         height: 20px;
         font: italic 10px / 14px DroidSerif;
@@ -31,17 +31,16 @@
       
     #join {
         position: absolute;
-        top: 0px;
-        left:1125px;
+        right: 5px;
+        top: 1px;
         font: 18px Roboto;
         color: white;
     }
-    #repfind{
-        position: absolute;
-        top: 5px;
-        left:850px;
+    #repfind{ 
+        margin: 10px;
+        display: inline-block;
         width:200px;
-        height: 90px;
+        height: 85px;
         border: 1px;
         border-color: black; 
         border-style: solid;
@@ -51,23 +50,13 @@
         vertical-align: center;
         cursor: pointer;
       } 
-    #find {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 16px;
-        text-align:center;
-        font: 23px Roboto;
-        color: black;
-    }
+   
     #nebmap {
         width: 200px;
-        height: 90px;
+        height: 85px;
       }
     .desktopnav {
-        display: inline;
-        position: absolute;
+        display: inline-block;  
         right: 450px;
         top: 35px;
         font: 900 24px 'Roboto';
@@ -99,12 +88,16 @@
     .mobilenav {
         display: none;
     }
+      nav{
+          display: inline-block;
+      }
      
       #footertext {
         position: relative;
-        top: 50px;
+        top: 30px;
         text-align: center;
-        font: 20px Roboto;
+        vertical-align: middle;
+        font: 12px Roboto;
         color: white;
           
    
@@ -125,8 +118,8 @@
             <a class="mobilenav" href="#"><img alt="Toggle Menu" src="images/icon.png"></a>
             
  <div id="repfind">
-        <span id="find">FIND YOUR <br> REPRESENTATIVES</span>
-        <a href="#"><img alt="Neb Map" id="nebmap" src="images/dmvcountiesmap1.gif"></a>
+        
+        <a href="#"><img alt="Neb Map" id="nebmap" src="images/Nebraska_silhouette2.png"></a>
     </div>   
         <span id="join">STAY UPDATED!</span>    
         <input type="email" id="emailcollection" placeholder="YOURNAME@ADDRESS.COM"/>
@@ -147,7 +140,12 @@
     <br/>
     <footer class="footer">
     
-    <h2 id= "footertext">LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM LOREM IPSUM</h2>
+    <p id= "footertext">Sign up to receive emails on important policy issues and action alerts. Or connect with us on social media.
+ <br>
+For questions, comments or to email the coalition coordinator, send a note to Jo at <a href="mailto:rebuildnebraska@gmail.com">rebuildnebraska@gmail.com</a>
+    <br>
+        	&copy; Rebuild Nebraska 2016
+        </p>
     
     </footer>
     
